@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ABE2, #5563DE);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.15);
+        }
+        h1 {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #5563DE;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #3b49b6;
+        }
+        .short-url-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .short-url-box input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-weight: bold;
+            color: #5563DE;
+        }
+        .short-url-box button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card p-4" style="max-width: 500px; margin: auto;">
+            <h1 class="text-center mb-4">🔗 URL Shortener</h1>
+            <form method="POST">
+                <div class="mb-3">
+                    <input type="url" name="long_url" class="form-control" placeholder="Enter your long URL" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Shorten URL</button>
+            </form>
+
+            {% if short_url %}
+            <div class="mt-4">
+                <label class="form-label">Your Shortened URL:</label>
+                <div class="short-url-box">
+                    <input type="text" value="{{ short_url }}" id="shortUrl" readonly>
+                    <button class="btn btn-outline-primary btn-sm" onclick="copyToClipboard()">Copy</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Copy Function -->
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("shortUrl");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied: " + copyText.value);
+        }
+    </script>
+</body>
+</html>
